@@ -13,14 +13,25 @@
 - `hist:` points at `/mnt/us/copyparty/hist`; no indexing (`e2d` unset) and thumbnails off, for the weak CPU.
 - No `PRTY_*`/other env guesses: only flags verified against `copyparty-sfx.py` 1.20.26 on a host.
 
-## First on-device checklist (not yet done)
-- [ ] KUAL menu appears
-- [ ] Selftest: `python3.11 -V`, `import ssl,sqlite3,zlib,ctypes` all succeed
-- [ ] First start (bytecode compile) completes; log in `copyparty/copyparty.log`
-- [ ] Port 3923 reachable from LAN (iptables rule from start.sh; `iptables -C` may be unsupported on the Kindle's iptables)
-- [ ] Upload/download works; WiFi survives screen-off
+## On-device results (2026-10-22)
+- [x] KUAL menu appears
+- [x] Selftest: Python 3.11.11, OpenSSL 1.1.1w, `ssl/sqlite3/zlib/ctypes/socket/json` import fine
+- [x] First start OK (no bytecode-compile delay observed); copyparty 1.20.26 listening on 0.0.0.0:3923
+- [x] Reachable from LAN over WiFi; copyparty confirmed working by the user
+- Device facts: kernel 4.1.15-lab126 armv7l, ~500 MB RAM (~170 MB available), /mnt/us is `fuse.fsp`,
+  stock iptables INPUT policy is DROP (start.sh inserts an ACCEPT for 3923; lost on reboot, re-added by Start).
+- Pitfall seen: user typed `https://...:392` -> silent DROP -> timeout. Must be `http://` and port `3923`.
+- Pitfall: USB connection unmounts /mnt/us from the Kindle, which breaks the running server.
+
+## Remaining TODO
+- [ ] `hist/` and `tmp/` live inside the served volume (copyparty warns `/copyparty/hist/4 gives access ...`);
+      consider serving `/mnt/us/documents` + a dedicated uploads dir, or excluding `/copyparty`.
+- [ ] Verify Stop menu entry cleans up (pid, iptables rule, preventScreenSaver) and that large uploads work.
+- [ ] Measure WiFi/battery behaviour with screen off; consider a timed auto-stop.
+- [ ] Optional: start-on-boot/upstart job (needs rootfs changes; deliberately not done).
+- [ ] Optional: HTTPS (needs a cert; `cfssl` isn't available on-device, could generate on host and ship).
+- [ ] Optional: `update.sh` to refresh copyparty/Python without recreating directories (install.sh refuses if present).
+- [ ] Test on other Kindle models (soft-float devices need a different Python build).
 
 ## Known risks
-- sfx extracts to `$HOME/.cache` (HOME is set to `/mnt/us/copyparty`) - confirm it lands on FAT without issue.
 - Memory: PW4 has ~512 MB RAM shared with the Kindle UI.
-- Python zip digest is not pinned yet (`PY_ZIP_SHA256` in install.sh); pin after a trusted run.

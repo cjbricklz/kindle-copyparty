@@ -3,9 +3,7 @@
 Run [copyparty](https://github.com/9001/copyparty) (a single-file Python file server) directly on a
 jailbroken Kindle, with a KUAL menu to start/stop it. No third-party apps or servers.
 
-> **Status: untested on-device.** Developed against a Kindle Paperwhite 4 (PW4), firmware 5.18.1.
-> Host-side steps (download, verify, extract, config validation against copyparty 1.20.26) are verified.
-> First on-device run is pending; see `docs/NOTES.md` for the checklist and known risks.
+> **Status: working on-device.** Verified on a Kindle Paperwhite 4 (PW4), firmware 5.18.1, copyparty 1.20.26, Python 3.11.11.
 > Please open issues with `copyparty/selftest.log` and `copyparty/copyparty.log` attached.
 
 ## Requirements
@@ -18,6 +16,11 @@ jailbroken Kindle, with a KUAL menu to start/stop it. No third-party apps or ser
 2. `./install.sh /path/to/Kindle`
 3. Eject, unplug, enable WiFi. In KUAL: **copyparty → Selftest**, then **Start copyparty**.
 4. Browse to `http://<kindle-ip>:3923`, user `kindle`, password printed by the installer.
+   Use plain **http** (no TLS cert is generated) and the full port **3923**; the Kindle firewall silently drops
+   other ports, so a typo just hangs instead of being refused.
+
+**Gotcha:** while the Kindle is plugged into a computer its storage is unmounted, so the server stops being
+usable and the device may drop off WiFi. Unplug, then run *Start copyparty* again.
 
 ## How it works
 Stock Kindle firmware has no Python. This uses the community

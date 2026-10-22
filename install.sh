@@ -8,7 +8,7 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 B="$HERE/build"
 
 PY_URL='https://www.mobileread.com/forums/attachment.php?attachmentid=215107'   # python3.11-khf.zip (toadclones, 2025-04-18)
-PY_ZIP_SHA256=''   # unpinned: forum attachment; fill in after first verified run (printed below)
+PY_ZIP_SHA256='748115e3f67e241fc32ba96a2214869207e70fad72f6ef1923a8f958bbf4f2fa'   # python3.11-khf.zip, verified working on PW4 fw 5.18.1
 CP_API='https://api.github.com/repos/9001/copyparty/releases/latest'
 
 [ -d "$K/extensions" ] && [ -f "$K/system/version.txt" ] || { echo "$K does not look like a Kindle root (needs extensions/ and system/version.txt)"; exit 1; }
