@@ -1,5 +1,7 @@
 # kindle-copyparty
 
+<img width="1240" height="781" alt="image" src="https://github.com/user-attachments/assets/9500b9d0-7e66-4cb8-a25b-7b594c38bbe7" />
+
 Run [copyparty](https://github.com/9001/copyparty) (a single-file Python file server) directly on a
 jailbroken Kindle, with a KUAL menu to start/stop it. No third-party apps or servers.
 
