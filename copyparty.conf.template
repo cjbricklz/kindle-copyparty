@@ -1,0 +1,16 @@
+# copyparty config for Kindle -- served volume is the whole user storage
+[global]
+  p: 3923
+  no-robots
+  no-thumb
+  hist: /mnt/us/copyparty/hist
+  ban-pw: 5,60,1440
+  rproxy: 0
+
+[accounts]
+  kindle: @PASSWORD@
+
+[/]
+  /mnt/us
+  accs:
+    rwmd: kindle

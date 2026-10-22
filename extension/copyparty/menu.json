@@ -1,0 +1,8 @@
+{
+	"items": [
+		{"name": "Start copyparty", "priority": 1, "action": "bin/start.sh", "exitmenu": false, "status": false},
+		{"name": "Stop copyparty", "priority": 2, "action": "bin/stop.sh", "exitmenu": false, "status": false},
+		{"name": "Show address / status", "priority": 3, "action": "bin/status.sh", "exitmenu": false, "status": false},
+		{"name": "Selftest (writes copyparty/selftest.log)", "priority": 4, "action": "bin/selftest.sh", "exitmenu": false, "status": false}
+	]
+}
